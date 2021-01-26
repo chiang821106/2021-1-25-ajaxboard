@@ -15,8 +15,6 @@ $(document).ready(function () {
     //  生成列表
     function createTable() {
 
-
-
         // 先清除列表
         $('#employeeTable').empty();
         $.each(employeeList, function (key, data) {
@@ -54,10 +52,10 @@ $(document).ready(function () {
 
             // 內容
 
-            td += '<td class="td4">'+ employeeList[key].boardcontent+'</td>';
+            td += '<td class="td4">'+'<textarea style="background:transparent;border-style:none;overflow:hidden;" cols="30" rows="2" disabled wrap={physical}/>'+employeeList[key].boardcontent+'</textarea>'+'</td>';
             // 時間
 
-            td += '<td class="td5">' + employeeList[key].boardtime + '</td>';
+            td += '<td class="td5" style="font-size:14px;">' + employeeList[key].boardtime + '</td>';
 
             // 修改與刪除按鈕
 
@@ -86,9 +84,9 @@ $(document).ready(function () {
 
             // 抓表單顯示
             $('#employeeTable').append(tr);
-
-            // 顯示共有幾筆資料
-            $('#totalData').text(number);
+            // // 顯示共有幾筆資料
+            // $('#totalData').text(number);
+            // console.log(tr);
         });
 
         // 呼叫修改對話框
@@ -182,9 +180,10 @@ $(document).ready(function () {
     //先呼叫一次更新畫面
     createTable();
 
-    //向後端抓資料顯示頁面------------------------待php
+    //向後端抓資料顯示頁面
     // //取得最新資料且更新
     function downloadAndUpateTable() {
+        
         // $.get('test.php', function (dataFromServer) {
         //     // employeeList = JSON.parse(dataFromServer); //將取得的字串改為陣列
         //     // createTable();
@@ -199,7 +198,9 @@ $(document).ready(function () {
         jQuery.ajax({
             url: '../../controllers/admin/j-index.php',
             method: 'get',
-            data: "json",
+            data:{
+                page:$('select[name="page"]').val()
+            },
             success: function (dataFromServer) {
                 var array = Object.keys(dataFromServer).map(function (_) {
                     return dataFromServer[_];
@@ -235,19 +236,24 @@ $(document).ready(function () {
 
         e.preventDefault();
 
-        //傳送給後端更新資料------------------------待php
+        //傳送給後端更新資料
         if (document.editFormID.boardname.value != "" && document.editFormID.boardsex.value != "" &&
             document.editFormID.boardsubject.value != "" && document.editFormID.boardcontent.value != "") {
-            $.ajax({
-                type: "post",
-                url: "../../controllers/admin/edit.php",
-                data: dataToServer,
-            }).then(function () {
-                //呼叫產生畫面
-                downloadAndUpateTable();
-                $("#myModifyModal").modal("hide");
-                alert('修改成功!');
-            })
+            if(document.editFormID.boardsex.value == "男" || document.editFormID.boardsex.value == "女"){
+                $.ajax({
+                    type: "post",
+                    url: "../../controllers/admin/edit.php",
+                    data: dataToServer,
+                }).then(function () {
+                    //呼叫產生畫面
+                    downloadAndUpateTable();
+                    $("#myModifyModal").modal("hide");
+                    alert('修改成功!');
+                })
+            }else{
+                alert("請不要亂改程式碼唷!");
+            }
+            
         } else if (document.editFormID.boardname.value == "") {
             alert("姓名不得為空唷!");
             return false;

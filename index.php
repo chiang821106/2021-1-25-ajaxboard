@@ -53,18 +53,20 @@ $db['AS']->query($sql);
 // // //計算總頁數=(總筆數/每頁筆數)後無條件進位。
 // // $total_pages = ceil($total_records / $pageRow_records);
 
+
+
+
+
 $smarty = new Smarty;
+
+$smarty->assign("page", $num_pages);
+$smarty->assign("page_p", $page_p);
 
 for ($i = 0; $i < $pageRow_records; $i++) {
     $db['AS']->next_record();
     $row[$i] = $db['AS']->record;
 }
-
 $smarty->assign("row", $row);
-$smarty->assign("page", $num_pages);
-$smarty->assign("page_p", $page_p);
-
-
 $smarty->assign("try", "測試文測試文測試文測試文測試文");
 $smarty->assign("echo", "我愛你");
 // $smarty->assign("re",);

@@ -1,4 +1,27 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 3.1.36, created on 2021-01-26 15:51:58
+  from 'C:\xampp\htdocs\PHP\2021-1-25-ajaxboard\index.html' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.36',
+  'unifunc' => 'content_600fca1edb16c0_99578442',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'f98bb169e6ffd37b2b4c92b173b6c4665b0c9f32' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\PHP\\2021-1-25-ajaxboard\\index.html',
+      1 => 1611647517,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_600fca1edb16c0_99578442 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
 <html lang="zh">
 
 <head>
@@ -11,14 +34,21 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    <?php echo '<script'; ?>
+ src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
-    </script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
-    <script src="public/js/index.js"></script>
+    <?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="public/js/index.js"><?php echo '</script'; ?>
+>
 
     <!-- 管理登入判斷 -->
-    <script language="javascript">
+    <?php echo '<script'; ?>
+ language="javascript">
         function checkForm() {
             if (document.formPost.username.value == "" && document.formPost.password.value == "") {
                 alert("請輸入帳號及密碼!");
@@ -33,7 +63,8 @@
                 return false;
             }
         }
-    </script>
+    <?php echo '</script'; ?>
+>
 </head>
 
 <body>
@@ -54,7 +85,9 @@
                     </td>
 
                     <td class="col">
-                        <!-- <p align="center">資料筆數：<?php echo $total_records; ?></p> -->
+                        <!-- <p align="center">資料筆數：<?php echo '<?php ';?>
+echo $total_records; <?php echo '?>';?>
+</p> -->
                     </td>
 
                     <td align="right" class="col">
@@ -62,8 +95,11 @@
                         <div class="page btn btn-info">
                             <form action="index.php" method="get">
                                 選擇分頁:
-                                <select name="page" onchange="submit()" value="<?=$page?>">
-                                {$page_p}
+                                <select name="page" onchange="submit()" value="<?php echo '<?=';?>
+$page<?php echo '?>';?>
+">
+                                <?php echo $_smarty_tpl->tpl_vars['page_p']->value;?>
+
                                 </select>
                             </form>
                         </div>
@@ -77,39 +113,50 @@
     <!-- <content>
         <table border="0" align="center" class="table table-danger table-striped" style="max-width:1200px;"
             cellpadding="4" cellspacing="0">
-            {for $i=0 to $row|@count-1}
+            <?php
+$_smarty_tpl->tpl_vars['i'] = new Smarty_Variable(null, $_smarty_tpl->isRenderingCache);$_smarty_tpl->tpl_vars['i']->step = 1;$_smarty_tpl->tpl_vars['i']->total = (int) ceil(($_smarty_tpl->tpl_vars['i']->step > 0 ? count($_smarty_tpl->tpl_vars['row']->value)-1+1 - (0) : 0-(count($_smarty_tpl->tpl_vars['row']->value)-1)+1)/abs($_smarty_tpl->tpl_vars['i']->step));
+if ($_smarty_tpl->tpl_vars['i']->total > 0) {
+for ($_smarty_tpl->tpl_vars['i']->value = 0, $_smarty_tpl->tpl_vars['i']->iteration = 1;$_smarty_tpl->tpl_vars['i']->iteration <= $_smarty_tpl->tpl_vars['i']->total;$_smarty_tpl->tpl_vars['i']->value += $_smarty_tpl->tpl_vars['i']->step, $_smarty_tpl->tpl_vars['i']->iteration++) {
+$_smarty_tpl->tpl_vars['i']->first = $_smarty_tpl->tpl_vars['i']->iteration === 1;$_smarty_tpl->tpl_vars['i']->last = $_smarty_tpl->tpl_vars['i']->iteration === $_smarty_tpl->tpl_vars['i']->total;?>
             <tr>
 
-                {if $row[$i]["boardsex"] == '男'}
+                <?php if ($_smarty_tpl->tpl_vars['row']->value[$_smarty_tpl->tpl_vars['i']->value]["boardsex"] == '男') {?>
                 <td width="60" align="center">
                     <img src="public/images/male.gif" width="49" height="49" alt="">
-                    <span>{$row[$i]["boardname"]}</span>
+                    <span><?php echo $_smarty_tpl->tpl_vars['row']->value[$_smarty_tpl->tpl_vars['i']->value]["boardname"];?>
+</span>
                 </td>
-                {else}
+                <?php } else { ?>
                 <td width="60" align="center">
                     <img src="public/images/female.gif" width="49" height="49" alt="">
-                    <span>{$row[$i]["boardname"]}</sapn>
+                    <span><?php echo $_smarty_tpl->tpl_vars['row']->value[$_smarty_tpl->tpl_vars['i']->value]["boardname"];?>
+</sapn>
                 </td>
-                {/if}
+                <?php }?>
 
                 <td width="60" align="center">
                     主題:
                 </td>
-                <td>{$row[$i]["boardsubject"]}</td>
+                <td><?php echo $_smarty_tpl->tpl_vars['row']->value[$_smarty_tpl->tpl_vars['i']->value]["boardsubject"];?>
+</td>
                 <td>內容:</td>
-                <td>{$row[$i]["boardcontent"]}</td>
-                <td>{$row[$i]["boardtime"]}</td>
-                {if $row[$i]["checked"] == 1 }
+                <td><?php echo $_smarty_tpl->tpl_vars['row']->value[$_smarty_tpl->tpl_vars['i']->value]["boardcontent"];?>
+</td>
+                <td><?php echo $_smarty_tpl->tpl_vars['row']->value[$_smarty_tpl->tpl_vars['i']->value]["boardtime"];?>
+</td>
+                <?php if ($_smarty_tpl->tpl_vars['row']->value[$_smarty_tpl->tpl_vars['i']->value]["checked"] == 1) {?>
                 <td>
                     <img src="public/images/love.gif" alt="" width="35" height="35">
                 </td>
-                {else}
+                <?php } else { ?>
                 <td>
                     <img src="public/images/unlove.gif" alt="" width="35" height="35">
                 </td>
-                {/if}
+                <?php }?>
             </tr>
-            {/for}
+            <?php }
+}
+?>
         </table>
     </content> -->
 
@@ -232,4 +279,5 @@
     </div>
 </body>
 
-</html>
+</html><?php }
+}

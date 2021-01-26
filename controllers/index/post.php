@@ -1,16 +1,27 @@
 <?php
 
+
+
+
+
+
 // 接收前端傳遞的值
-$boardname = $_POST['boardname'];
-$boardsex = $_POST['boardsex'];
-$boardsubject = $_POST['boardsubject'];
-$boardcontent = $_POST['boardcontent'];
+$boardname = filter_var($_POST['boardname'],FILTER_SANITIZE_STRING);
+$boardsex = filter_var($_POST['boardsex'],FILTER_SANITIZE_STRING);
+$boardsubject = filter_var($_POST['boardsubject'],FILTER_SANITIZE_STRING);
+$boardcontent = filter_var($_POST['boardcontent'],FILTER_SANITIZE_STRING);
 
 
 require_once("../class/mysqlilib.php");
 
-$sql = "INSERT INTO board(boardname,boardsex,boardsubject,boardcontent,boardtime) VALUES ('$boardname','$boardsex','$boardsubject','$boardcontent',NOW())";
-$db['AS']->query($sql);
+if($boardsex == "男" || $boardsex == "女"){
+    $sql = "INSERT INTO board(boardname,boardsex,boardsubject,boardcontent,boardtime) VALUES ('$boardname','$boardsex','$boardsubject','$boardcontent',NOW())";
+    $db['AS']->query($sql);
+    $db['AS']->close();
+}else{
+    echo false;
+}
+
 
 
 // $query_insert = "INSERT INTO board (boardname ,boardsex ,boardsubject ,boardcontent,boardtime) VALUES (?, ?, ?, ?,NOW())";
@@ -21,7 +32,6 @@ $db['AS']->query($sql);
 // );
 // $stmt->execute();
 // $stmt->close();
-$db['AS']->close();
 
 ?>
 
