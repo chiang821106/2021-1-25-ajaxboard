@@ -1,8 +1,8 @@
 <?php
 
 
-
-require '../class/mysqlilib.php';
+require '../class/session.php';
+require '../class/conn.php';
 require '../class/class_page.php';
 require '../../libs/Smarty.class.php';
 
@@ -58,6 +58,11 @@ $smarty->assign("page", $num_pages);
 $smarty->assign("page_p", $page_p);
 $smarty->assign("try", "測試文測試文測試文測試文測試文");
 // $smarty->assign("re",);
+
+$sex[1] = '男';
+$sex[2] = '女';
+// $sex[3] = '人妖';
+$smarty->assign("sex",$sex);
 $smarty->display('../../views/admin.html');
 
 ?>

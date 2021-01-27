@@ -11,6 +11,7 @@ session_start();
 if (isset($_GET['logout']) && ($_GET['logout'] == "true")) {
     // echo $username;
     unset($_SESSION['loginMember']);
+    unset($_SESSION['loginPassword']);
     echo "<script> alert('已經登出!');location.href='../../index.php';</script>";
     // header("Location:index.php");
 }

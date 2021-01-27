@@ -1,7 +1,8 @@
 <?php
 
-
-
+$sex[1] = '男';
+$sex[2] = '女';
+$sex_str=$sex[$boardsex];
 
 
 
@@ -12,9 +13,9 @@ $boardsubject = filter_var($_POST['boardsubject'],FILTER_SANITIZE_STRING);
 $boardcontent = filter_var($_POST['boardcontent'],FILTER_SANITIZE_STRING);
 
 
-require_once("../class/mysqlilib.php");
+require_once("../class/conn.php");
 
-if($boardsex == "男" || $boardsex == "女"){
+if($boardsex == "1" || $boardsex == "2"){
     $sql = "INSERT INTO board(boardname,boardsex,boardsubject,boardcontent,boardtime) VALUES ('$boardname','$boardsex','$boardsubject','$boardcontent',NOW())";
     $db['AS']->query($sql);
     $db['AS']->close();

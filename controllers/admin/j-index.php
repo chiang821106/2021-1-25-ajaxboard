@@ -3,7 +3,7 @@
 header('Content-type:text/json');
 
 
-require '../class/mysqlilib.php';
+require '../class/conn.php';
 require '../class/class_page.php';
 
 $pageRow_records = 5;
@@ -28,7 +28,7 @@ if ($num_pages > $page_end) {
 $row_start = ( $num_pages -1 ) * $pageRow_records;
 $row_end = $row_start + $pageRow_records;
 
-$sql = "SELECT * FROM board ORDER BY boardtime DESC LIMIT $row_start, $row_end";
+$sql = "SELECT * FROM board ORDER BY boardtime DESC LIMIT $row_start, $pageRow_records";
 $db['AS']->query($sql);
 
 
@@ -56,7 +56,7 @@ $db['AS']->query($sql);
 //  echo json_encode($r);
 
 if(isset($_GET['page']) && isset($_GET['page']) != ""){
-    for ($i = 0; $i < $pageRow_records; $i++) {
+    for ($i = 0; $i < $db['AS']->_num_rows; $i++) {
         $db['AS']->next_record();
         $row[$i] = $db['AS']->record;
         // print_r($row[$i]);

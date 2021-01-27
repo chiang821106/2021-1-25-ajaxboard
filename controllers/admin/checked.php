@@ -1,5 +1,4 @@
 <?php
-
 require_once("../class/connMysql.php");
 
 $checked = 1;

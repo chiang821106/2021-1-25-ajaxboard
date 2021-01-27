@@ -1,6 +1,5 @@
 <?php
-
-require_once("../class/mysqlilib.php");
+require_once("../class/conn.php");
 
 // 執行刪除動作
     $boardid = filter_var($_POST['boardid'],FILTER_SANITIZE_NUMBER_INT);

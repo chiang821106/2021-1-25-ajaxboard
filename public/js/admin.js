@@ -30,7 +30,7 @@ $(document).ready(function () {
 
             // 姓名
 
-            td += '<td width="10%" class="td1">' + employeeList[key].boardname + '</td>';
+            td += '<td width="10%" class="td1 text-primary">' + employeeList[key].boardname + '</td>';
 
             // 性別
 
@@ -45,14 +45,24 @@ $(document).ready(function () {
                 default:
                     break;
             }
+            switch (employeeList[key].boardsex) {
+                case "男":
+                    td += '<td width="5%" style="display:none;" class="text-center td6 ">' + employeeList[key].boardsex +'</td>';
+                    break;
+                case "女":
+                    td += '<td width="5%" style="display:none;" class="text-center td6 ">' + employeeList[key].boardsex  +'</td>';
+                    break;
+                default:
+                    break;
+            }
 
             // 主題
 
-            td += '<td class="td3">' + employeeList[key].boardsubject + '</td>';
+            td += '<td class="td3 text-danger">' + employeeList[key].boardsubject + '</td>';
 
             // 內容
 
-            td += '<td class="td4">'+'<textarea style="background:transparent;border-style:none;overflow:hidden;" cols="30" rows="2" disabled wrap={physical}/>'+employeeList[key].boardcontent+'</textarea>'+'</td>';
+            td += '<td class="td4">' + '<textarea class="text-dark" style="font-size:24px;background:transparent;border-style:none;overflow:hidden;" cols="30" rows="2" disabled wrap={physical}/>' + employeeList[key].boardcontent + '</textarea>' + '</td>';
             // 時間
 
             td += '<td class="td5" style="font-size:14px;">' + employeeList[key].boardtime + '</td>';
@@ -60,17 +70,17 @@ $(document).ready(function () {
             // 修改與刪除按鈕
 
             td += '<td>' + '<a class="btn btn-success text-white myModifyBtn">修改</a>' +
-                '&nbsp;&nbsp;' + '<a class="btn btn-danger text-white myDeleteBtn delete" data-id="'+ employeeList[key].boardid +'">刪除</a>';
+                '&nbsp;&nbsp;' + '<a class="btn btn-danger text-white myDeleteBtn delete" data-id="' + employeeList[key].boardid + '">刪除</a>';
 
             // 已讀狀態
 
             switch (employeeList[key].checked) {
 
                 case "0":
-                    td += '<td class="text-center">' + '<button align="right" class="btn btn-light check" data-id="'+ employeeList[key].boardid +'">' + '<img src="../../public/images/unlove.gif" width="35" height="35" alt="未讀">' + '</button>' + '</td>';
+                    td += '<td class="text-center">' + '<button align="right" class="btn btn-light check" data-id="' + employeeList[key].boardid + '">' + '<img src="../../public/images/unlove.gif" width="35" height="35" alt="未讀">' + '</button>' + '</td>';
                     break;
                 case "1":
-                    td += '<td class="text-center">' + '<button align="right" class="btn btn-light checked" data-id="'+ employeeList[key].boardid +'">'+'<img src="../../public/images/love.gif" width="35" height="35" alt="已讀">' + '</button>' + '</td>';
+                    td += '<td class="text-center">' + '<button align="right" class="btn btn-light checked" data-id="' + employeeList[key].boardid + '">' + '<img src="../../public/images/love.gif" width="35" height="35" alt="已讀">' + '</button>' + '</td>';
                     break;
                 default:
                     break;
@@ -92,7 +102,7 @@ $(document).ready(function () {
         // 呼叫修改對話框
         $(".myModifyBtn").click(function () {
             $("#myModifyModal").modal('show');
-            var boardname, boardsex, boardsubject, boardcontent, inputVal = "";
+            var boardname,boardsex,boardsubject,boardcontent,inputVal = "";
 
             // 當再次點擊修改時清空值
             $('#boardname').val("");
@@ -106,8 +116,13 @@ $(document).ready(function () {
             $('#boardname').val(boardname);
 
             // 性別
-            boardsex = $(this).parent().parent().children('td.td2').text();
-            $('#boardsex').val(boardsex);
+            boardsex = $(this).parent().parent().children('td.td6').text();
+            if(boardsex == "男"){
+                $('#boardsex')[0].selectedIndex = 0; 
+            }else if(boardsex == "女"){
+                $('#boardsex')[0].selectedIndex = 1; 
+
+            }
 
             // 主題
             boardsubject = $(this).parent().parent().children('td.td3').text();
@@ -120,14 +135,16 @@ $(document).ready(function () {
             // ID
             inputVal = $(this).parent().parent().children('input.inputVal').val();
             $('#inputVal').val(inputVal);
-            // console.log(inputVal);
+            // console.log(boardname);
+            // console.log(boardsex);
+            
         });
 
         // 愛心已讀功能
         $(".checked").click(function () {
             alert("已經已讀囉!");
         })
-        
+
         $('.check').click(function () {
             var ele = $(this);
             //抓取boardid-------
@@ -183,7 +200,7 @@ $(document).ready(function () {
     //向後端抓資料顯示頁面
     // //取得最新資料且更新
     function downloadAndUpateTable() {
-        
+
         // $.get('test.php', function (dataFromServer) {
         //     // employeeList = JSON.parse(dataFromServer); //將取得的字串改為陣列
         //     // createTable();
@@ -198,15 +215,15 @@ $(document).ready(function () {
         jQuery.ajax({
             url: '../../controllers/admin/j-index.php',
             method: 'get',
-            data:{
-                page:$('select[name="page"]').val()
+            data: {
+                page: $('select[name="page"]').val()
             },
             success: function (dataFromServer) {
                 var array = Object.keys(dataFromServer).map(function (_) {
                     return dataFromServer[_];
                 });
                 employeeList = array; //將取得的字串改為陣列
-                console.log(employeeList);
+                // console.log(employeeList);
                 createTable();
             }
         });
@@ -232,28 +249,24 @@ $(document).ready(function () {
         };
         var id = $('#inputVal').val();
         // console.log(boardname);
-        // console.log(dataToServer);
+        // console.log(dataToServer.boardsex);
 
         e.preventDefault();
 
         //傳送給後端更新資料
         if (document.editFormID.boardname.value != "" && document.editFormID.boardsex.value != "" &&
             document.editFormID.boardsubject.value != "" && document.editFormID.boardcontent.value != "") {
-            if(document.editFormID.boardsex.value == "男" || document.editFormID.boardsex.value == "女"){
-                $.ajax({
-                    type: "post",
-                    url: "../../controllers/admin/edit.php",
-                    data: dataToServer,
-                }).then(function () {
-                    //呼叫產生畫面
-                    downloadAndUpateTable();
-                    $("#myModifyModal").modal("hide");
-                    alert('修改成功!');
-                })
-            }else{
-                alert("請不要亂改程式碼唷!");
-            }
-            
+
+            $.ajax({
+                type: "post",
+                url: "../../controllers/admin/edit.php",
+                data: dataToServer,
+            }).then(function () {
+                //呼叫產生畫面
+                downloadAndUpateTable();
+                $("#myModifyModal").modal("hide");
+                alert('修改成功!');
+            })
         } else if (document.editFormID.boardname.value == "") {
             alert("姓名不得為空唷!");
             return false;

@@ -2,7 +2,7 @@
 
 
 
-require 'controllers/class/mysqlilib.php';
+require 'controllers/class/conn.php';
 require 'controllers/class/class_page.php';
 require 'libs/Smarty.class.php';
 
@@ -69,5 +69,11 @@ for ($i = 0; $i < $pageRow_records; $i++) {
 $smarty->assign("row", $row);
 $smarty->assign("try", "測試文測試文測試文測試文測試文");
 $smarty->assign("echo", "我愛你");
+
+
+$sex[1] = '男';
+$sex[2] = '女';
+// $sex[3] = '人妖';
+$smarty->assign("sex",$sex);
 // $smarty->assign("re",);
 $smarty->display('index.html');

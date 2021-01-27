@@ -39,7 +39,7 @@ $(document).ready(function () {
 
             // 姓名
 
-            td += '<td width="10%" class="td1">' + employeeList[key].boardname + '</td>';
+            td += '<td width="10%" class="td1 text-primary">' + employeeList[key].boardname + '</td>';
 
 
             // 性別
@@ -58,11 +58,11 @@ $(document).ready(function () {
 
             // 主題
 
-            td += '<td class="td2">' + employeeList[key].boardsubject + '</td>';
+            td += '<td class="td2 text-danger">' + employeeList[key].boardsubject + '</td>';
 
             // 內容
 
-            td += '<td class="td4">' + '<textarea style="background:transparent;border-style:none;overflow:hidden;" cols="30" rows="2" disabled wrap={physical}/>' + employeeList[key].boardcontent + '</textarea>' + '</td>';
+            td += '<td class="td4">' + '<textarea class="text-dark" style="font-size:24px;background:transparent;border-style:none;overflow:hidden;" cols="30" rows="2" disabled wrap={physical}/>' + employeeList[key].boardcontent + '</textarea>' + '</td>';
             // 時間
 
             td += '<td class="td2" style="font-size:14px;">' + employeeList[key].boardtime + '</td>';
@@ -122,7 +122,7 @@ $(document).ready(function () {
                 //     return dataFromServer[_];
                 // });
                 employeeList = dataFromServer; //將取得的字串改為陣列
-                console.log(employeeList);
+                // console.log(employeeList);
                 createTable();
             }
         });
@@ -161,22 +161,20 @@ $(document).ready(function () {
 
             e.preventDefault();
 
-            if(document.myForm.boardsex.value == "男" || document.myForm.boardsex.value == "女"){
-                jQuery.ajax({
-                    url: 'controllers/index/post.php',
-                    method: 'post',
-                    data: dataToServer,
-                    success: function () {
-                        // 呼叫更新畫面
-                        downloadAndUpateTable();
-                        //關掉對話框
-                        $("#myAddModal").modal("hide");
-                        alert('留言成功!');
-                    }
-                })
-            }else{
-                alert("請不要亂改程式碼唷!")
-            }
+
+            jQuery.ajax({
+                url: 'controllers/index/post.php',
+                method: 'post',
+                data: dataToServer,
+                success: function () {
+                    // 呼叫更新畫面
+                    downloadAndUpateTable();
+                    //關掉對話框
+                    $("#myAddModal").modal("hide");
+                    alert('留言成功!');
+                }
+            })
+
         } else if (document.myForm.boardname.value == "") {
             alert("請輸入姓名!");
             return false;

@@ -1,4 +1,27 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 3.1.36, created on 2021-01-27 15:26:23
+  from 'C:\xampp\htdocs\PHP\2021-1-26-ajaxboard\views\admin.html' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.36',
+  'unifunc' => 'content_6011159f2501e0_36332048',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'a3034d3efb5c46da22256268cd5d77371c465ac2' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\PHP\\2021-1-26-ajaxboard\\views\\admin.html',
+      1 => 1611730995,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_6011159f2501e0_36332048 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
 <html lang="zh">
 
 <head>
@@ -10,11 +33,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    <?php echo '<script'; ?>
+ src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-        crossorigin="anonymous"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
-    <script src="../../public/js/admin.js"></script>
+        crossorigin="anonymous"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="../../public/js/admin.js"><?php echo '</script'; ?>
+>
 </head>
 
 <body>
@@ -35,7 +64,9 @@
                     </td>
 
                     <td class="col" style="font-size:20px;position:relative;">
-                        <!-- <p align="left" style="">目前資料筆數：<?php echo $total_records; ?></p> -->
+                        <!-- <p align="left" style="">目前資料筆數：<?php echo '<?php ';?>
+echo $total_records; <?php echo '?>';?>
+</p> -->
                     </td>
 
 
@@ -43,7 +74,10 @@
 
                         <div class="page btn btn-info">
                             <form action="../../controllers/admin/admin.php" method="get">
-                                選擇分頁:<select name="page" onchange="submit()" value="<?=$page?>">{$page_p}</select>
+                                選擇分頁:<select name="page" onchange="submit()" value="<?php echo '<?=';?>
+$page<?php echo '?>';?>
+"><?php echo $_smarty_tpl->tpl_vars['page_p']->value;?>
+</select>
                             </form>
                         </div>
 
@@ -57,49 +91,64 @@
     <!-- <content>
         <table border="0" align="center" class="table table-primary table-striped" style="max-width:1200px;"
             cellpadding="4" cellspacing="0">
-            {for $i=0 to $row|@count-1}
+            <?php
+$_smarty_tpl->tpl_vars['i'] = new Smarty_Variable(null, $_smarty_tpl->isRenderingCache);$_smarty_tpl->tpl_vars['i']->step = 1;$_smarty_tpl->tpl_vars['i']->total = (int) ceil(($_smarty_tpl->tpl_vars['i']->step > 0 ? count($_smarty_tpl->tpl_vars['row']->value)-1+1 - (0) : 0-(count($_smarty_tpl->tpl_vars['row']->value)-1)+1)/abs($_smarty_tpl->tpl_vars['i']->step));
+if ($_smarty_tpl->tpl_vars['i']->total > 0) {
+for ($_smarty_tpl->tpl_vars['i']->value = 0, $_smarty_tpl->tpl_vars['i']->iteration = 1;$_smarty_tpl->tpl_vars['i']->iteration <= $_smarty_tpl->tpl_vars['i']->total;$_smarty_tpl->tpl_vars['i']->value += $_smarty_tpl->tpl_vars['i']->step, $_smarty_tpl->tpl_vars['i']->iteration++) {
+$_smarty_tpl->tpl_vars['i']->first = $_smarty_tpl->tpl_vars['i']->iteration === 1;$_smarty_tpl->tpl_vars['i']->last = $_smarty_tpl->tpl_vars['i']->iteration === $_smarty_tpl->tpl_vars['i']->total;?>
             <tr>
 
-                {if $row[$i]["boardsex"] == '男'}
+                <?php if ($_smarty_tpl->tpl_vars['row']->value[$_smarty_tpl->tpl_vars['i']->value]["boardsex"] == '男') {?>
                 <td width="60" align="center">
                     <img src="images/male.gif" width="49" height="49" alt="">
-                    <span>{$row[$i]["boardname"]}</span>
+                    <span><?php echo $_smarty_tpl->tpl_vars['row']->value[$_smarty_tpl->tpl_vars['i']->value]["boardname"];?>
+</span>
                 </td>
-                {else}
+                <?php } else { ?>
                 <td width="60" align="center">
                     <img src="images/female.gif" width="49" height="49" alt="">
-                    <span>{$row[$i]["boardname"]}</sapn>
+                    <span><?php echo $_smarty_tpl->tpl_vars['row']->value[$_smarty_tpl->tpl_vars['i']->value]["boardname"];?>
+</sapn>
                 </td>
-                {/if}
+                <?php }?>
 
                 <td width="60" align="center">
                     主題:
                 </td>
-                <td>{$row[$i]["boardsubject"]}</td>
+                <td><?php echo $_smarty_tpl->tpl_vars['row']->value[$_smarty_tpl->tpl_vars['i']->value]["boardsubject"];?>
+</td>
                 <td>內容:</td>
-                <td>{$row[$i]["boardcontent"]}</td>
-                <td>{$row[$i]["boardtime"]}</td>
+                <td><?php echo $_smarty_tpl->tpl_vars['row']->value[$_smarty_tpl->tpl_vars['i']->value]["boardcontent"];?>
+</td>
+                <td><?php echo $_smarty_tpl->tpl_vars['row']->value[$_smarty_tpl->tpl_vars['i']->value]["boardtime"];?>
+</td>
                 <td>
-                    <a class="btn btn-dark" href="adminfix.php?id={$row[$i]["boardid"]}">修改</a>
-                    <a class="btn btn-danger" href="admindel.php?id={$row[$i]["boardid"]}">刪除</a>
+                    <a class="btn btn-dark" href="adminfix.php?id=<?php echo $_smarty_tpl->tpl_vars['row']->value[$_smarty_tpl->tpl_vars['i']->value]["boardid"];?>
+">修改</a>
+                    <a class="btn btn-danger" href="admindel.php?id=<?php echo $_smarty_tpl->tpl_vars['row']->value[$_smarty_tpl->tpl_vars['i']->value]["boardid"];?>
+">刪除</a>
                 </td>
-                {if $row[$i]["checked"] == 1 }
+                <?php if ($_smarty_tpl->tpl_vars['row']->value[$_smarty_tpl->tpl_vars['i']->value]["checked"] == 1) {?>
                 <td>
-                    <button align="right" class="btn btn-light checked" data-id="{$row[$i]["boardid"]}">
+                    <button align="right" class="btn btn-light checked" data-id="<?php echo $_smarty_tpl->tpl_vars['row']->value[$_smarty_tpl->tpl_vars['i']->value]["boardid"];?>
+">
                         <img src="images/love.gif" alt="已讀愛心" width="35" height="35">
                     </button>
                 </td>
-                {else}
+                <?php } else { ?>
                 <td>
 
-                    <button align="right" class="btn btn-light check" data-id="{$row[$i]["boardid"]}">
+                    <button align="right" class="btn btn-light check" data-id="<?php echo $_smarty_tpl->tpl_vars['row']->value[$_smarty_tpl->tpl_vars['i']->value]["boardid"];?>
+">
                         <img src="images/unlove.gif" alt="no讀愛心" width="35" height="35">
                     </button>
 
                 </td>
-                {/if}
+                <?php }?>
             </tr>
-            {/for}
+            <?php }
+}
+?>
         </table>
     </content> -->
     <!-- 頁中-動態表單 -->
@@ -159,11 +208,19 @@
               
                             <div class="form-group form-inline ">
                                 <label for="boardsex" class="col-3">性別:(請選擇)</label>
-                                <select class="form-control col-8 selector" id="boardsex">
-                                   {{foreach from=$sex item=i key=k}}
-                                    <option value="{{$k}}">{{$i}}</option>
-                                   {{/foreach}}
-                                   <!-- <option {{if $k == "2"}} selected {{/if}} ></option> -->
+                                <select class="form-control col-8" id="boardsex">
+                                   <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['sex']->value, 'i', false, 'k');
+$_smarty_tpl->tpl_vars['i']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['k']->value => $_smarty_tpl->tpl_vars['i']->value) {
+$_smarty_tpl->tpl_vars['i']->do_else = false;
+?>
+                                    <option value="<?php echo $_smarty_tpl->tpl_vars['k']->value;?>
+"><?php echo $_smarty_tpl->tpl_vars['i']->value;?>
+</option>
+                                   <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                 </select>
                                 <input type="hidden" value="" id="inputVal">
                             </div>
@@ -190,4 +247,5 @@
 
 </body>
 
-</html>
+</html><?php }
+}
